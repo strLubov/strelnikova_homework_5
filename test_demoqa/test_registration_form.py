@@ -1,4 +1,4 @@
-from selene import browser, have, be,  by
+from selene import browser, have, be,  by, command
 import os
 
 def test_registration_form(browser_setup):
@@ -32,8 +32,8 @@ def test_registration_form(browser_setup):
     browser.element('#currentAddress').type(ADDRESS)
     browser.element(by.id('react-select-3-input')).type(STATE).press_enter()
     browser.element(by.id('react-select-4-input')).type(CITY).press_enter()
-    browser.execute_script("document.querySelector('#close-fixedban').remove()")
-    browser.element(by.id('submit')).click()
+    browser.execute_script("document.querySelector('#fixedban').remove()")
+    browser.element('#submit').perform(command.js.click)
 
     # check result
     browser.element(by.id('example-modal-sizes-title-lg')).should(
